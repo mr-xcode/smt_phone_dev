@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class AdminPanelController extends GetxController {
+  //TODO: Implement AdminPanelController
 
   final count = 0.obs;
   @override

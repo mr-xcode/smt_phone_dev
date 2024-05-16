@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/premium_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+class PremiumView extends GetView<PremiumController> {
+  const PremiumView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Home',
+          'PremiumView',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
       ),
       body: const Center(
         child: Text(
-          'HomeView is working',
+          'PremiumView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

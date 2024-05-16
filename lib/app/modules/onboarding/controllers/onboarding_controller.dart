@@ -23,7 +23,7 @@ class OnboardingController extends GetxController {
   ];
 
   void completeOnboarding() async {
-    Get.offAllNamed('/home');
+    Get.offAllNamed('/auth-gate');
   }
 
   @override

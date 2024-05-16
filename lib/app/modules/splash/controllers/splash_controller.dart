@@ -27,7 +27,7 @@ class SplashController extends GetxController {
       await prefs.setBool('repeat', true);
       Get.offAllNamed('/onboarding');
     } else {
-      Get.offAllNamed('/onboarding');
+      Get.offAllNamed('/auth-gate');
     }
   }
 }
