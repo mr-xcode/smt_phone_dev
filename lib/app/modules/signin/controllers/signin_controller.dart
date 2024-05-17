@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
 
 class SigninController extends GetxController {
   //TODO: Implement SigninController
@@ -27,7 +28,8 @@ class SigninController extends GetxController {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
     } catch (e) {
-      print(e.toString());
+      Get.snackbar("Error", e.toString(),
+          backgroundColor: GFColors.DANGER, colorText: Colors.white);
     }
   }
 }

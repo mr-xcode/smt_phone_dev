@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:getwidget/colors/gf_color.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/components/button/gf_button_bar.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 import 'package:smt_phonesh_dev/app/modules/pricing/widgets/pricing_card.dart';
-import 'package:smt_phonesh_dev/app/modules/pricing/widgets/show_confirm_dialog.dart';
 
 import '../controllers/pricing_controller.dart';
 

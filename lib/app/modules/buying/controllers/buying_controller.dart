@@ -5,14 +5,30 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:smt_phonesh_dev/app/data/user.model.dart';
 
 class BuyingController extends GetxController {
   var isSSImageChooseSuccess = false.obs;
   late File file;
+  Rx<UserModel>? user;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+    Map<String, dynamic> data = documentSnapshot.data()!;
+    user = UserModel(
+      userName: data['username'],
+      userEmail: data['email'],
+      userPhoneNumber: data['phoneNumber'],
+      userAddress: data['address'],
+      userProfileUrl: data['imageUrl'],
+    ).obs;
   }
 
   @override
@@ -31,10 +47,11 @@ class BuyingController extends GetxController {
     if (result != null) {
       file = File(result.files.single.path!);
       isSSImageChooseSuccess.value = true;
-      Get.snackbar("Success", "Image Choosen...");
+      Get.snackbar("Success", "Image Choosen...",
+          backgroundColor: GFColors.SUCCESS);
     } else {
       // User canceled the picker
-      Get.snackbar("Cancel", "No Image");
+      Get.snackbar("Cancel", "No Image", backgroundColor: GFColors.DANGER);
     }
   }
 
@@ -84,67 +101,21 @@ class BuyingController extends GetxController {
       await FirebaseFirestore.instance
           .collection('buyingUsers')
           .doc(userId)
-          .set({
-        'userId': userId,
-        'imageUrl': imageUrl,
-        'duration': _duration,
-        'price': price,
-        'isChecked': false,
-        'profileUrl': getProfileUrl(),
-        'userName': getUsernName(),
-        'phoneNumber': getPhoneNumber(),
-        'email': getEmail(),
-      });
+          .set(
+        {
+          'userId': userId,
+          'imageUrl': imageUrl,
+          'duration': _duration,
+          'price': price,
+          'isChecked': false,
+          'profileUrl': user?.value.userProfileUrl,
+          'userName': user?.value.userName,
+          'phoneNumber': user?.value.userPhoneNumber,
+          'email': user?.value.userEmail,
+        },
+      );
     } catch (e) {
-      Get.snackbar("Error", "Try again later");
+      Get.snackbar("Error", "Cannot create document!");
     }
-  }
-
-  Future<String> getProfileUrl() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-
-    Map<String, dynamic> data = documentSnapshot.data()!;
-    String profileUrl = data['imageUrl'];
-    return profileUrl;
-  }
-
-  Future<String> getUsernName() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-
-    Map<String, dynamic> data = documentSnapshot.data()!;
-    String userName = data['username'];
-    return userName;
-  }
-
-  Future<String> getPhoneNumber() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-
-    Map<String, dynamic> data = documentSnapshot.data()!;
-    String phoneNumber = data['phoneNumber'];
-    return phoneNumber;
-  }
-
-  Future<String> getEmail() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-
-    Map<String, dynamic> data = documentSnapshot.data()!;
-    String email = data['email'];
-    return email;
   }
 }

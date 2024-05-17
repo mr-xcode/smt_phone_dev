@@ -8,7 +8,7 @@ void showConfirmDialog(BuildContext context, String duration, String price) {
       return AlertDialog(
         title: Text('အတည်ပြုချက်'),
         content: Text(
-            'လိုင်စင် ဝယ်ယူရန်အတွက် ကျသင့်ငွေကို Kpay သို့ Wave မှ လွဲပေးရပါမည်။ ၄င်းနောက် ss ပို့ပေးရပါမည်။ Are You Ready?'),
+            'လိုင်စင် ဝယ်ယူရန်အတွက် ကျသင့်ငွေကို Kpay (သို့မဟုတ်) Wave မှ လွဲပေးရပါမည်။ ၄င်းနောက် ScreenShoot (ss) ပို့ပေးရပါမည်။ \nAre You Ready?'),
         actions: <Widget>[
           TextButton(
             child: Text('နောက်မှ'),

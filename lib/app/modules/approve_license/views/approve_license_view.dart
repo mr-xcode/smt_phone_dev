@@ -35,8 +35,6 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
             itemCount: controller.buyingUsersQuerySnapshot?.docs.length,
             itemBuilder: (context, index) {
               // Build the view for each document
-              controller.fetchUserData(
-                  controller.buyingUsersQuerySnapshot!.docs[index]['userId']);
               return GFCard(
                 boxFit: BoxFit.cover,
                 titlePosition: GFPosition.start,
@@ -50,14 +48,17 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
                 title: GFListTile(
                   avatar: GFAvatar(
                     backgroundImage: NetworkImage(
-                      controller.profileUrl.value.toString(),
+                      controller.buyingUsersQuerySnapshot?.docs[index]
+                          ['profileUrl'],
                     ),
                   ),
                   titleText: controller.buyingUsersQuerySnapshot?.docs[index]
-                      ['userId' ?? ''],
-                  subTitleText: 'PlayStation 4',
+                      ['userName' ?? ''],
+                  subTitleText: controller.buyingUsersQuerySnapshot?.docs[index]
+                      ['email' ?? ''],
                 ),
-                content: Text("Some quick example text to build on the card"),
+                content: Text(
+                    "Duration: ${controller.buyingUsersQuerySnapshot?.docs[index]['duration']}, Pricce: ${controller.buyingUsersQuerySnapshot?.docs[index]['price']},"),
                 buttonBar: GFButtonBar(
                   children: <Widget>[
                     GestureDetector(
