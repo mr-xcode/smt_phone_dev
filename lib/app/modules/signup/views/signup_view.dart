@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../controllers/signup_controller.dart';
 
@@ -22,28 +23,33 @@ class SignupView extends GetView<SignupController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Image Choose View
-                Obx(
-                  () => Container(
-                    height: 100,
+                Obx(() {
+                  return Container(
                     width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.shade200,
-                    ),
-                    child: controller.selectedImage.value != null
-                        ? Image.memory(
-                            controller.selectedImageData.value!,
-                            fit: BoxFit.contain,
-                          )
-                        : Text('?'),
-                  ),
+                    height: 100,
+                    color: Colors.grey.shade200,
+                    child: controller.isProfileImageChooseSuccess.value
+                        ? Image.file(controller.file)
+                        : Center(
+                            child: Text(
+                            "?",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          )),
+                  );
+                }),
+                SizedBox(
+                  height: 10,
                 ),
-
                 // Choose Image
-                GFButton(
-                  onPressed: () {},
-                  child: Text("Choose Image..."),
-                ),
+                Obx(() => GFButton(
+                      onPressed: !controller.isProfileImageChooseSuccess.value
+                          ? () {
+                              controller.chooseImage();
+                            }
+                          : null,
+                      child: Text("Choose Image..."),
+                    )),
 
                 // Username:
                 TextField(
@@ -76,13 +82,17 @@ class SignupView extends GetView<SignupController> {
                 ),
 
                 // Signup Button
-                GFButton(
-                  onPressed: () {
-                    controller.signUp();
-                  },
-                  blockButton: true,
-                  child: Text('Sign Up'),
-                ),
+                Obx(() => GFButton(
+                      onPressed: controller.isSignUpLoading.value
+                          ? null
+                          : () {
+                              controller.signUp();
+                            },
+                      blockButton: true,
+                      child: controller.isSignUpLoading.value
+                          ? GFLoader()
+                          : Text('Sign Up'),
+                    )),
               ],
             ),
           ),

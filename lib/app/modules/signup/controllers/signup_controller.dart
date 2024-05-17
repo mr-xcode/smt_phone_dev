@@ -1,71 +1,59 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
-
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phonenumberController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
-  Rx<File?> selectedImage = Rx<File?>(null);
-  Rx<Uint8List?> selectedImageData = Rx<Uint8List?>(null);
+  late File file;
 
   bool isUsernameValid = false;
   bool isPhonenumberValid = false;
   bool isAddressValid = false;
   bool isPasswordValid = false;
+  var isProfileImageChooseSuccess = false.obs;
+  var isSignUpLoading = false.obs;
   @override
   void onInit() {
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  Future<XFile?> _pickImageFromPlatform() async {
-    final picker = ImagePicker();
-    if (GetPlatform.isWeb) {
-      return await picker.pickImage(source: ImageSource.gallery);
-    } else {
-      return await picker.pickImage(source: ImageSource.gallery);
-    }
+    isProfileImageChooseSuccess.value = false;
   }
 
   Future<void> chooseImage() async {
-    try {
-      final pickedFile = await _pickImageFromPlatform();
-      if (pickedFile != null) {
-        final imageData = await pickedFile.readAsBytes();
-        selectedImageData.value = imageData;
-      }
-    } catch (e) {
-      print('Error picking image: $e');
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      file = File(result.files.single.path!);
+      isProfileImageChooseSuccess.value = true;
+    } else {
+      // User canceled the picker
+      Get.snackbar("Cancel", "No Image");
     }
   }
 
   Future<void> signUp() async {
-    if (usernameController.text.length > 8) {
+    if (!isProfileImageChooseSuccess.value) {
+      Get.snackbar("Profile Image", 'Choose image please');
+      return;
+    }
+
+    if (usernameController.text.length > 6) {
       isUsernameValid = true;
     } else {
       Get.snackbar("Username", 'Username is too short');
       return;
     }
+
     if (passwordController.text.length > 5) {
       isPasswordValid = true;
     } else {
@@ -85,17 +73,33 @@ class SignupController extends GetxController {
       return;
     }
     try {
+      isSignUpLoading.value = true;
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailController.text, password: passwordController.text);
       String userId = userCredential.user!.uid;
-      createUserInDb(userId);
+      String imageUrl = await uploadProfileImage(file);
+      createUserInDb(userId, imageUrl);
+      Get.offAllNamed('/home');
     } catch (e) {
-      print(e.toString());
+      Get.snackbar("Error", e.toString());
     }
   }
 
-  Future<void> createUserInDb(String userId) async {
+  Future<String> uploadProfileImage(File imageFile) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference storageRef = storage.ref();
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference imageRef = storageRef.child('profileImages/$fileName');
+
+    UploadTask uploadTask = imageRef.putFile(imageFile);
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+
+    String imageUrl = await taskSnapshot.ref.getDownloadURL();
+    return imageUrl;
+  }
+
+  Future<void> createUserInDb(String userId, String imageUrl) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(userId).set({
         'userId': userId,
@@ -106,6 +110,7 @@ class SignupController extends GetxController {
         'address': addressController.text,
         'role': 'user',
         'expireOn': '',
+        'imageUrl': imageUrl,
         // Add any other user-specific data you want to store
       });
     } catch (e) {

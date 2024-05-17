@@ -12,6 +12,10 @@ abstract class Routes {
   static const ADMIN_PANEL = _Paths.ADMIN_PANEL;
   static const PREMIUM = _Paths.PREMIUM;
   static const SIGNUP = _Paths.SIGNUP;
+  static const ADMIN_ADD_NEW = _Paths.ADMIN_ADD_NEW;
+  static const PRICING = _Paths.PRICING;
+  static const BUYING = _Paths.BUYING;
+  static const APPROVE_LICENSE = _Paths.APPROVE_LICENSE;
 }
 
 abstract class _Paths {
@@ -25,4 +29,8 @@ abstract class _Paths {
   static const ADMIN_PANEL = '/admin-panel';
   static const PREMIUM = '/premium';
   static const SIGNUP = '/signup';
+  static const ADMIN_ADD_NEW = '/admin-add-new';
+  static const PRICING = '/pricing';
+  static const BUYING = '/buying';
+  static const APPROVE_LICENSE = '/approve-license';
 }

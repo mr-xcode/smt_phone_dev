@@ -54,7 +54,7 @@ class SplashView extends GetView<SplashController> {
               right: 10,
               child: Center(
                 child: Text(
-                  'Version 1.0', // Replace with your desired footer text
+                  'Version 1.0.0 beta release', // Replace with your desired footer text
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.normal,

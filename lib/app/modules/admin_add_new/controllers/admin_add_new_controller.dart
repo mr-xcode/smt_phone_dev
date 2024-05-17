@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smt_phonesh_dev/app/data/user.model.dart';
 
-class AdminPanelController extends GetxController {
-  //TODO: Implement AdminPanelController
+class AdminAddNewController extends GetxController {
+  //TODO: Implement AdminAddNewController
 
   final selectedBrand = ''.obs;
   final selectedModel = ''.obs;
@@ -20,8 +17,6 @@ class AdminPanelController extends GetxController {
   final modelList = [].obs;
   final subModelList = [].obs;
   final stringSubModelList = "".obs;
-
-  Rx<UserModel>? user;
 
   List<String> brandList = [
     'Samsung',
@@ -67,25 +62,6 @@ class AdminPanelController extends GetxController {
   }
 
   @override
-  void onInit() async {
-    // TODO: implement onInit
-    super.onInit();
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-    Map<String, dynamic> data = documentSnapshot.data()!;
-    user = UserModel(
-      userName: data['username'],
-      userEmail: data['email'],
-      userPhoneNumber: data['phoneNumber'],
-      userAddress: data['address'],
-      userProfileUrl: data['imageUrl'],
-    ).obs;
-  }
-
-  @override
   void onClose() {
     super.onClose();
     selectedBrand.value = '';
@@ -125,26 +101,5 @@ class AdminPanelController extends GetxController {
     for (final Reference ref in result.prefixes) {
       await deleteFolderRecursive(ref.fullPath);
     }
-  }
-
-  Future<void> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-    } catch (e) {
-      Get.snackbar("Error", "Something went wrong");
-    }
-  }
-
-  Future<String> fetchImageUrl() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-    Map<String, dynamic> data = documentSnapshot.data()!;
-
-    String imageUrl = data['imageUrl'];
-    print('imgeUrl: ${imageUrl}');
-    return imageUrl;
   }
 }
