@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/colors/gf_color.dart';
 
 class ApproveLicenseController extends GetxController {
   QuerySnapshot? buyingUsersQuerySnapshot;
@@ -13,19 +14,9 @@ class ApproveLicenseController extends GetxController {
   var profileUrl = ''.obs;
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
-
-    try {
-      buyingUsersQuerySnapshot = await FirebaseFirestore.instance
-          .collection('buyingUsers')
-          .where('isChecked', isEqualTo: false)
-          .get();
-
-      isLoaded.value = true;
-    } catch (e) {
-      Get.snackbar("Error", "Try again later");
-    }
+    refreshData();
   }
 
   @override
@@ -53,6 +44,67 @@ class ApproveLicenseController extends GetxController {
       update();
     } else {
       Get.snackbar("Error", "loading error.");
+    }
+  }
+
+  void updateIsChecked(String userId) async {
+    try {
+      final DocumentReference userRef =
+          FirebaseFirestore.instance.collection('buyingUsers').doc(userId);
+
+      await userRef.update({'isChecked': true});
+
+      Get.snackbar("Removed request", "-", backgroundColor: GFColors.DANGER);
+      Get.offAllNamed('/admin-panel');
+    } catch (error) {
+      //print('Failed to update isChecked');
+      Get.snackbar("Error", "Try again later");
+    }
+  }
+
+  void approveUser(String userId, int duration) async {
+    DateTime now = DateTime.now();
+    int day = now.day;
+    int month = now.month;
+    int year = now.year;
+
+    if (month + duration > 12) {
+      month = month + duration - 12;
+      year = year + 1;
+    } else {
+      month = month + duration;
+    }
+    DateTime expireDate = DateTime(year, month, day);
+
+    try {
+      // update role and expire date on users collection
+      final DocumentReference userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      await userRef.update({'expireOn': expireDate});
+      await userRef.update({'role': 'premium'});
+
+      // update buyingUser collection
+      final DocumentReference buyingUserRef =
+          FirebaseFirestore.instance.collection('buyingUsers').doc(userId);
+      await buyingUserRef.update({'isChecked': true});
+
+      Get.snackbar("License Approved", "-", backgroundColor: GFColors.SUCCESS);
+      Get.offAllNamed('/admin-panel');
+    } catch (e) {
+      Get.snackbar("Error", "Try again later");
+    }
+  }
+
+  void refreshData() async {
+    try {
+      buyingUsersQuerySnapshot = await FirebaseFirestore.instance
+          .collection('buyingUsers')
+          .where('isChecked', isEqualTo: false)
+          .get();
+
+      isLoaded.value = true;
+    } catch (e) {
+      Get.snackbar("Error", "Try again later");
     }
   }
 }

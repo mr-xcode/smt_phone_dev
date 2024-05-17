@@ -60,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                 Center(
                     child: Text(
                   "လိုင်စင် ဝယ်ယူရန် လိုပါတယ်။",
-                  style: TextStyle(color: GFColors.ALT),
+                  style: TextStyle(color: ColorConsts.blackColor),
                 )),
                 SizedBox(
                   height: 30,
@@ -71,6 +71,7 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       Get.toNamed('/pricing');
                     },
+                    color: ColorConsts.priColor,
                     child: Text("ဝယ်ယူရန်"),
                   ),
                 ),

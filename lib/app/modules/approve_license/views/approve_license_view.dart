@@ -36,11 +36,11 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
             itemBuilder: (context, index) {
               // Build the view for each document
               return GFCard(
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
                 titlePosition: GFPosition.start,
                 image: Image.network(
                   controller.buyingUsersQuerySnapshot!.docs[index]['imageUrl'],
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                 ),
@@ -63,8 +63,8 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Get.snackbar("Decline", ".",
-                            backgroundColor: GFColors.DANGER);
+                        controller.updateIsChecked(controller
+                            .buyingUsersQuerySnapshot?.docs[index]['userId']);
                       },
                       child: GFAvatar(
                         backgroundColor: GFColors.DANGER,
@@ -76,10 +76,11 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.snackbar(
-                          "Appoved",
-                          ".",
-                          backgroundColor: GFColors.SUCCESS,
+                        controller.approveUser(
+                          controller.buyingUsersQuerySnapshot?.docs[index]
+                              ['userId'],
+                          controller.buyingUsersQuerySnapshot?.docs[index]
+                              ['duration'],
                         );
                       },
                       child: GFAvatar(

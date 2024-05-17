@@ -3,22 +3,21 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingController extends GetxController {
-  //TODO: Implement OnboardingController
   final List<PageViewModel> onboardingPages = [
     PageViewModel(
       title: 'Welcome',
-      body: 'Welcome to the onboarding screen!',
-      image: Image.asset('assets/onboarding/one.webp'),
+      body: 'SMT - PhoneSH မှ ကြိုဆိုပါတယ်!',
+      image: Image.asset('assets/onboarding/_one.png'),
     ),
     PageViewModel(
       title: 'Features',
-      body: 'Discover amazing features of our app.',
-      image: Image.asset('assets/onboarding/two.webp'),
+      body: 'အစုံလင်ဆုံးသော Schematic Diagram များ။',
+      image: Image.asset('assets/onboarding/_two.png'),
     ),
     PageViewModel(
       title: 'Get Started',
-      body: 'Get started and enjoy using our app.',
-      image: Image.asset('assets/onboarding/three.png'),
+      body: 'စတင် လုပ်ဆောင်လိုက်ရအောင်ပါ။',
+      image: Image.asset('assets/onboarding/_three.png'),
     ),
   ];
 

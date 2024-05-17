@@ -60,7 +60,11 @@ class BuyingView extends GetView<BuyingController> {
                               controller.chooseImage();
                             },
                       blockButton: true,
-                      icon: Icon(Icons.image),
+                      color: ColorConsts.priColor,
+                      icon: Icon(
+                        Icons.image,
+                        color: Colors.white,
+                      ),
                       child: Text('SS ထည့်မယ်'),
                     ),
                   ),

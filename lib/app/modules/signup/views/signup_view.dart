@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 
 import '../controllers/signup_controller.dart';
 
@@ -12,8 +13,15 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SignupView'),
-        centerTitle: true,
+        title: Text(
+          'SMT - PhoneSH Login',
+          style: TextStyle(
+            fontSize: 19,
+            fontWeight: FontWeight.w600,
+            color: ColorConsts.blackColor,
+          ),
+        ),
+        backgroundColor: ColorConsts.scaffoldBgColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -27,7 +35,7 @@ class SignupView extends GetView<SignupController> {
                   return Container(
                     width: 100,
                     height: 100,
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade300,
                     child: controller.isProfileImageChooseSuccess.value
                         ? Image.file(controller.file)
                         : Center(
@@ -48,6 +56,7 @@ class SignupView extends GetView<SignupController> {
                               controller.chooseImage();
                             }
                           : null,
+                      color: ColorConsts.priColor,
                       child: Text("Choose Image..."),
                     )),
 
@@ -80,7 +89,9 @@ class SignupView extends GetView<SignupController> {
                   controller: controller.addressController,
                   decoration: InputDecoration(label: Text("Address: ")),
                 ),
-
+                SizedBox(
+                  height: 20,
+                ),
                 // Signup Button
                 Obx(() => GFButton(
                       onPressed: controller.isSignUpLoading.value
@@ -88,6 +99,7 @@ class SignupView extends GetView<SignupController> {
                           : () {
                               controller.signUp();
                             },
+                      color: ColorConsts.priColor,
                       blockButton: true,
                       child: controller.isSignUpLoading.value
                           ? GFLoader()

@@ -46,7 +46,7 @@ class UserDrawer extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Role: ${_controller.role}',
+                      '< Free Acc >',
                       style: TextStyle(color: Colors.white, fontSize: 10),
                     ),
                   ],

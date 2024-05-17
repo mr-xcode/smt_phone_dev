@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 
 import '../controllers/signin_controller.dart';
 
@@ -11,55 +12,134 @@ class SigninView extends GetView<SigninController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SigninView'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: controller.emailController,
-              decoration: InputDecoration(
-                label: Text(
-                  "Email:",
-                ),
-              ),
-            ),
-            TextField(
-              controller: controller.passwordController,
-              decoration: InputDecoration(
-                label: Text(
-                  "Password:",
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      backgroundColor: ColorConsts.priColor,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GFButton(
-                  onPressed: () {
-                    Get.offNamed('/signup');
-                  },
-                  child: Text("Register"),
-                  color: GFColors.SECONDARY,
+                Image.asset(
+                  'assets/logo/logo_transparent.png',
+                  width: 100,
+                  height: 100,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  'SMT - PhoneSH Login',
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w600,
+                    color: ColorConsts.blackColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextField(
+                  style: TextStyle(color: Colors.white),
+                  controller: controller.emailController,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    fillColor: Colors.black12,
+                    filled: true,
+                    label: Text(
+                      "Email:",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.email,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Obx(() => TextField(
+                      style: TextStyle(color: Colors.white),
+                      obscureText: controller.obscureText.value,
+                      controller: controller.passwordController,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            controller.obscureText.value =
+                                !controller.obscureText.value;
+                          },
+                          icon: (!controller.obscureText.value)
+                              ? Icon(
+                                  Icons.visibility,
+                                  color: GFColors.SUCCESS,
+                                )
+                              : Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.black,
+                                ),
+                        ),
+                        fillColor: Colors.black12,
+                        filled: true,
+                        label: Text(
+                          "Password:",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.password,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )),
+                SizedBox(
+                  height: 20,
                 ),
                 GFButton(
                   onPressed: () {
                     controller.signIn();
                   },
-                  child: Text("Login"),
-                  color: GFColors.PRIMARY,
+                  blockButton: true,
+                  child: Text(
+                    "Login",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  ),
+                  color: GFColors.FOCUS,
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 8,
+            child: GFButton(
+              onPressed: () {
+                Get.toNamed('/signup');
+              },
+              child: Row(
+                children: [
+                  Text("Not a member? "),
+                  Text(
+                    "Sign up ",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white,
+                        fontSize: 14,
+                        color: GFColors.WARNING,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text("now"),
+                ],
+              ),
+              color: GFColors.TRANSPARENT,
+            ),
+          ),
+        ],
       ),
     );
   }

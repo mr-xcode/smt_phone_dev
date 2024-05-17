@@ -8,6 +8,7 @@ class SigninController extends GetxController {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  var obscureText = true.obs;
   @override
   void onInit() {
     super.onInit();
