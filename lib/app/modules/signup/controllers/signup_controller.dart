@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/components/loader/gf_loader.dart';
 
 class SignupController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
@@ -17,9 +16,26 @@ class SignupController extends GetxController {
 
   late File file;
 
+  Rx<String> selectedItem = 'Yangon Region'.obs;
+  List<String> items = [
+    'Ayeyarwady Region',
+    'Bago Region',
+    'Chin State',
+    'Kachin State',
+    'Kayin State',
+    'Kayah State',
+    'Magway Region',
+    'Mandalay Region',
+    'Mon State',
+    'Rakhine State',
+    'Sagaing Region',
+    'Shan State',
+    'Tanintharyi Region',
+    'Yangon Region',
+  ];
+
   bool isUsernameValid = false;
   bool isPhonenumberValid = false;
-  bool isAddressValid = false;
   bool isPasswordValid = false;
   var isProfileImageChooseSuccess = false.obs;
   var isSignUpLoading = false.obs;
@@ -66,12 +82,6 @@ class SignupController extends GetxController {
       Get.snackbar("PhoneNumber", "Enter a valid Phone number");
       return;
     }
-    if (addressController.text.length > 5) {
-      isAddressValid = true;
-    } else {
-      Get.snackbar("Address", "Please enter valid Address");
-      return;
-    }
     try {
       isSignUpLoading.value = true;
       UserCredential userCredential = await FirebaseAuth.instance
@@ -107,9 +117,9 @@ class SignupController extends GetxController {
         'email': emailController.text,
         'password': passwordController.text,
         'phoneNumber': phonenumberController.text,
-        'address': addressController.text,
+        'address': selectedItem.value,
         'role': 'user',
-        'expireOn': '',
+        'expireOn': DateTime.now(),
         'imageUrl': imageUrl,
         // Add any other user-specific data you want to store
       });

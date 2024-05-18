@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -21,6 +22,8 @@ class HomeController extends GetxController {
   var address = ''.obs;
   var role = ''.obs;
   var profileUrl = ''.obs;
+
+  final expireOn = ''.obs;
 
   final Rx<bool> isChecked = true.obs;
   late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>> _subscription;
@@ -47,6 +50,9 @@ class HomeController extends GetxController {
     address.value = documentSnapshot.get('address');
     role.value = documentSnapshot.get('role');
     profileUrl.value = documentSnapshot.get('imageUrl');
+
+    var raw = documentSnapshot.get('expireOn').toDate();
+    expireOn.value = DateFormat('MMMM d, yyyy').format(raw);
   }
 
   @override

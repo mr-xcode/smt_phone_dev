@@ -14,7 +14,7 @@ class SignupView extends GetView<SignupController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'SMT - PhoneSH Login',
+          'SMT - PhoneSH Sign Up',
           style: TextStyle(
             fontSize: 19,
             fontWeight: FontWeight.w600,
@@ -63,32 +63,77 @@ class SignupView extends GetView<SignupController> {
                 // Username:
                 TextField(
                   controller: controller.usernameController,
-                  decoration: InputDecoration(label: Text("UserName: ")),
+                  decoration: InputDecoration(
+                    label: Text("UserName: "),
+                    suffixIcon: Icon(Icons.person),
+                    hintText: 'SMT User',
+                  ),
                 ),
 
                 // Email:
                 TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: controller.emailController,
-                  decoration: InputDecoration(label: Text("Email: ")),
+                  decoration: InputDecoration(
+                    label: Text("Email: "),
+                    suffixIcon: Icon(Icons.email),
+                    hintText: 'smtuser@gmail.com',
+                  ),
                 ),
 
                 // Password:
                 TextField(
                   controller: controller.passwordController,
-                  decoration: InputDecoration(label: Text("Password: ")),
+                  decoration: InputDecoration(
+                    label: Text("Password: "),
+                    suffixIcon: Icon(Icons.lock),
+                    hintText: '******',
+                  ),
                 ),
 
                 // PhoneNumber:
                 TextField(
+                  keyboardType: TextInputType.phone,
                   controller: controller.phonenumberController,
-                  decoration: InputDecoration(label: Text("Phone Number: ")),
+                  decoration: InputDecoration(
+                    label: Text("Phone Number: "),
+                    suffixIcon: Icon(Icons.phone),
+                    hintText: '09xxxxxxxx',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Address:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Address: "),
+                    Obx(
+                      () => DropdownButton<String>(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                        borderRadius: BorderRadius.circular(10),
+                        hint: Text("Address: "),
+                        style: TextStyle(
+                          color: ColorConsts.blackColor,
+                        ),
+                        value: controller.selectedItem.value,
+                        onChanged: (newValue) {
+                          controller.selectedItem.value = newValue ?? '';
+                        },
+                        items: controller.items
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
                 ),
 
-                // Address:
-                TextField(
-                  controller: controller.addressController,
-                  decoration: InputDecoration(label: Text("Address: ")),
-                ),
                 SizedBox(
                   height: 20,
                 ),
