@@ -24,6 +24,8 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/training/bindings/training_binding.dart';
+import '../modules/training/views/training_view.dart';
 
 part 'app_routes.dart';
 
@@ -92,6 +94,11 @@ class AppPages {
       name: _Paths.APPROVE_LICENSE,
       page: () => const ApproveLicenseView(),
       binding: ApproveLicenseBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRAINING,
+      page: () => const TrainingView(),
+      binding: TrainingBinding(),
     ),
   ];
 }
