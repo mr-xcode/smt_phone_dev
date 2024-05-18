@@ -95,6 +95,7 @@ class HomeView extends GetView<HomeController> {
                     height: 10,
                   ),
                   TextField(
+                    controller: controller.licensekeyController,
                     decoration: InputDecoration(
                       label: Text(
                         "Activation Key:",
@@ -107,7 +108,19 @@ class HomeView extends GetView<HomeController> {
                   ),
                   Center(
                     child: GFButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (controller.licensekeyController.text.isEmpty) {
+                          Get.snackbar("Error", "License Key is Empty",
+                              backgroundColor: GFColors.DANGER,
+                              colorText: Colors.white);
+                        } else {
+                          Get.snackbar(
+                              "Error", "Your key is not support or expired",
+                              backgroundColor: GFColors.DANGER,
+                              colorText: Colors.white);
+                        }
+                        controller.licensekeyController.clear();
+                      },
                       color: GFColors.ALT,
                       blockButton: true,
                       child: Text("Activate"),
