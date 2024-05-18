@@ -75,7 +75,7 @@ class SigninView extends GetView<SigninController> {
                           icon: (!controller.obscureText.value)
                               ? Icon(
                                   Icons.visibility,
-                                  color: GFColors.SUCCESS,
+                                  color: Colors.white,
                                 )
                               : Icon(
                                   Icons.visibility_off,
