@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +22,17 @@ class HomeController extends GetxController {
   var role = ''.obs;
   var profileUrl = ''.obs;
 
+  final Rx<bool> isChecked = true.obs;
+  late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>> _subscription;
+
+  HomeController() {
+    ever(isChecked, (_) => update());
+  }
+
   @override
   void onInit() {
     super.onInit();
+    _fetchIsChecked();
   }
 
   @override
@@ -41,6 +51,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    _subscription.cancel();
     super.onClose();
   }
 
@@ -50,5 +61,15 @@ class HomeController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", "Something went wrong");
     }
+  }
+
+  void _fetchIsChecked() {
+    _subscription = FirebaseFirestore.instance
+        .collection('buyingUsers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((snapshot) {
+      isChecked.value = snapshot.data()?['isChecked'] ?? true;
+    });
   }
 }

@@ -66,14 +66,16 @@ class HomeView extends GetView<HomeController> {
                   height: 30,
                 ),
                 Center(
-                  child: GFButton(
-                    blockButton: true,
-                    onPressed: () {
-                      Get.toNamed('/pricing');
-                    },
-                    color: ColorConsts.priColor,
-                    child: Text("ဝယ်ယူရန်"),
-                  ),
+                  child: Obx(() => GFButton(
+                        blockButton: true,
+                        onPressed: (controller.isChecked.value)
+                            ? () {
+                                Get.toNamed('/pricing');
+                              }
+                            : null,
+                        color: ColorConsts.priColor,
+                        child: Text("ဝယ်ယူရန်"),
+                      )),
                 ),
                 Divider(
                   color: Colors.grey,

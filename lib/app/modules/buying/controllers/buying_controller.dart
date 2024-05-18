@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:smt_phonesh_dev/app/data/user.model.dart';
@@ -61,9 +62,13 @@ class BuyingController extends GetxController {
     String imageUrl = await uploadProfileImage(file);
 
     createUserInDb(userId, imageUrl, duration, price);
-    Get.snackbar("Success",
-        "လုပ်ဆောင်ချက်အောင်မြင်ပါသည်။ \nAdmin Team မှ ငွေလွဲအတည်ပြုပြီးပါက \nလိုင်စင်ကီးကို ထည့်သွင်းထားပေးပါမည်။ \nအတည်ပြုရန် ကြာချိန် \nနာရီဝက်မှ ၁၂ နာရီအထိကြာနိုင်ပါသည်။",
-        duration: Duration(seconds: 30));
+    Get.snackbar(
+      "Success",
+      "လုပ်ဆောင်ချက်အောင်မြင်ပါသည်။ \nAdmin Team မှ ငွေလွဲအတည်ပြုပြီးပါက \nလိုင်စင်ကီးကို ထည့်သွင်းထားပေးပါမည်။ \nအတည်ပြုရန် ကြာချိန် \nနာရီဝက်မှ ၁၂ နာရီအထိကြာနိုင်ပါသည်။",
+      duration: Duration(seconds: 30),
+      backgroundColor: GFColors.FOCUS,
+      colorText: Colors.white,
+    );
     Get.offAllNamed('/home');
   }
 
