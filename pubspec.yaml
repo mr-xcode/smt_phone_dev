@@ -32,6 +32,8 @@ flutter:
   assets:
     - assets/logo/
     - assets/onboarding/
+    - assets/training/
+    
 
 
 flutter_launcher_icons:
