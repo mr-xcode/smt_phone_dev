@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -73,6 +74,50 @@ class PremiumView extends GetView<PremiumController> {
           borderRadius: BorderRadius.circular(24.0),
         ),
       ),
+      body: Obx(() => SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.all(16.0),
+              width: double.infinity,
+              child: (controller.selectedBrand.value.isEmpty)
+                  ? Text(
+                      'Choice Brand First from drawer \nor \n Search From Title Bar!')
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Brand: ${controller.selectedBrand.value}',
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 16.0),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 15,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: ListTile(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                onTap: () {
+                                  Get.toNamed('/detailed-view');
+                                },
+                                tileColor: Colors.white,
+                                title: Text('iPhone 15'),
+                                subtitle: Text('Sub title'),
+                                leading: FaIcon(FontAwesomeIcons.apple),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: 55,
+                        ),
+                      ],
+                    ),
+            ),
+          )),
     );
   }
 }

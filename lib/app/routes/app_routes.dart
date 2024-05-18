@@ -18,6 +18,7 @@ abstract class Routes {
   static const APPROVE_LICENSE = _Paths.APPROVE_LICENSE;
   static const TRAINING = _Paths.TRAINING;
   static const REQUEST_MISSING = _Paths.REQUEST_MISSING;
+  static const DETAILED_VIEW = _Paths.DETAILED_VIEW;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const APPROVE_LICENSE = '/approve-license';
   static const TRAINING = '/training';
   static const REQUEST_MISSING = '/request-missing';
+  static const DETAILED_VIEW = '/detailed-view';
 }

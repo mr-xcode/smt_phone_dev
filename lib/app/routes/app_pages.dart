@@ -10,6 +10,8 @@ import '../modules/auth_gate/bindings/auth_gate_binding.dart';
 import '../modules/auth_gate/views/auth_gate_view.dart';
 import '../modules/buying/bindings/buying_binding.dart';
 import '../modules/buying/views/buying_view.dart';
+import '../modules/detailed_view/bindings/detailed_view_binding.dart';
+import '../modules/detailed_view/views/detailed_view_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: _Paths.REQUEST_MISSING,
       page: () => const RequestMissingView(),
       binding: RequestMissingBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILED_VIEW,
+      page: () => const DetailedViewView(),
+      binding: DetailedViewBinding(),
     ),
   ];
 }

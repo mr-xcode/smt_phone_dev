@@ -1,28 +1,15 @@
-AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        title: const Text(
-          'SMT - PhoneSH',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: ColorConsts.priColor,
-        actions: [
-          GFButton(
-            onPressed: () {
-              Get.toNamed('/training');
-            },
-            color: GFColors.TRANSPARENT,
-            icon: Icon(
-              Icons.laptop,
-              color: ColorConsts.blackColor,
-            ),
-            text: "Trainings",
-            textColor: ColorConsts.blackColor,
-          ),
-        ],
-      ),
+ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              onTap: () {
+                                Get.snackbar("Pressed", '-');
+                              },
+                              tileColor: Colors.white,
+                              title: Text('iPhone 15'),
+                              subtitle: Text('Sub title'),
+                              leading: FaIcon(FontAwesomeIcons.apple),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
