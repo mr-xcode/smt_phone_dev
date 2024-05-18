@@ -8,35 +8,49 @@ import 'package:smt_phonesh_dev/app/modules/premium/views/widgets/premium_drawer
 import '../controllers/premium_controller.dart';
 
 class PremiumView extends GetView<PremiumController> {
-  const PremiumView({Key? key}) : super(key: key);
+  PremiumView({Key? key}) : super(key: key);
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        title: const Text(
-          'SMT - PhoneSH',
-          style: TextStyle(
+      key: _scaffoldKey,
+      appBar: GFAppBar(
+        onChanged: (value) {
+          print(value);
+        },
+        onSubmitted: (value) {
+          print('Summited value: ${value}');
+          controller.titleSearchController.clear();
+        },
+        onTap: () {
+          print('Tapped');
+        },
+        searchController: controller.titleSearchController,
+        searchHintText: 'iPhone 15 Pro Max',
+        leading: GFIconButton(
+          icon: Icon(
+            Icons.menu,
             color: Colors.white,
-            fontWeight: FontWeight.w600,
           ),
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          type: GFButtonType.transparent,
         ),
-        centerTitle: true,
-        backgroundColor: ColorConsts.priColor,
-        actions: [
-          GFButton(
+        searchBar: true,
+        title: Text('SMT'),
+        actions: <Widget>[
+          GFIconButton(
+            tooltip: 'Trainings',
+            icon: Icon(
+              Icons.laptop,
+              color: Colors.white,
+            ),
             onPressed: () {
               Get.toNamed('/training');
             },
-            color: GFColors.TRANSPARENT,
-            icon: Icon(
-              Icons.laptop,
-              color: ColorConsts.blackColor,
-            ),
-            text: "Trainings",
-            textColor: ColorConsts.blackColor,
+            type: GFButtonType.transparent,
           ),
         ],
       ),

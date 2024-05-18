@@ -40,6 +40,8 @@ class PremiumController extends GetxController {
   final subModelList = [].obs;
   final stringSubModelList = "".obs;
 
+  final TextEditingController titleSearchController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();

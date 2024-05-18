@@ -69,7 +69,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PREMIUM,
-      page: () => const PremiumView(),
+      page: () => PremiumView(),
       binding: PremiumBinding(),
     ),
     GetPage(
