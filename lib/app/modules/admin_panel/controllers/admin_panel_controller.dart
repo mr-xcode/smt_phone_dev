@@ -132,17 +132,4 @@ class AdminPanelController extends GetxController {
       Get.snackbar("Error", "Something went wrong");
     }
   }
-
-  Future<String> fetchImageUrl() async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-    Map<String, dynamic> data = documentSnapshot.data()!;
-
-    String imageUrl = data['imageUrl'];
-    print('imgeUrl: ${imageUrl}');
-    return imageUrl;
-  }
 }

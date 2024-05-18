@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smt_phonesh_dev/app/data/user.model.dart';
 
 class AdminAddNewController extends GetxController {
   //TODO: Implement AdminAddNewController
@@ -17,6 +20,14 @@ class AdminAddNewController extends GetxController {
   final modelList = [].obs;
   final subModelList = [].obs;
   final stringSubModelList = "".obs;
+
+  Rx<UserModel>? user;
+
+  var userEmail = ''.obs;
+  var userPhoneNumber = ''.obs;
+  var userAddress = ''.obs;
+  var userProfileUrl = ''.obs;
+  var userName = ''.obs;
 
   List<String> brandList = [
     'Apple',
@@ -61,6 +72,24 @@ class AdminAddNewController extends GetxController {
   }
 
   @override
+  void onInit() async {
+    super.onInit();
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+    Map<String, dynamic> data = documentSnapshot.data()!;
+    user = UserModel(
+      userName: data['username'],
+      userEmail: data['email'],
+      userPhoneNumber: data['phoneNumber'],
+      userAddress: data['address'],
+      userProfileUrl: data['imageUrl'],
+    ).obs;
+  }
+
+  @override
   void onClose() {
     super.onClose();
     selectedBrand.value = '';
@@ -99,6 +128,22 @@ class AdminAddNewController extends GetxController {
     // Recursively delete subfolders
     for (final Reference ref in result.prefixes) {
       await deleteFolderRecursive(ref.fullPath);
+    }
+  }
+
+  Future<void> getUserData() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    Map<String, dynamic>? userData =
+        documentSnapshot.data() as Map<String, dynamic>?;
+    if (userData != null) {
+      userEmail = userData['userEmail'];
+      userPhoneNumber = userData['userPhoneNumber'];
+      userAddress = userData['userAddress'];
+      userProfileUrl = userData['userProfileUrl'];
+      userName = userData['username'];
     }
   }
 }

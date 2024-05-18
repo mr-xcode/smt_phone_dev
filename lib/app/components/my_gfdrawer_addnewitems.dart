@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 import 'package:smt_phonesh_dev/app/modules/admin_add_new/controllers/admin_add_new_controller.dart';
 
 class MyGFDrawer {
@@ -14,12 +15,16 @@ class MyGFDrawer {
         padding: EdgeInsets.zero,
         children: <Widget>[
           GFDrawerHeader(
+            centerAlign: true,
             decoration: BoxDecoration(
               color: Color(0xff0C89CE),
             ),
-            currentAccountPicture: const GFAvatar(
-              backgroundImage: NetworkImage(
-                  "https://zipmex.com/static/d1af016df3c4adadee8d863e54e82331/1bbe7/Twitter-NFT-profile.jpg"),
+            currentAccountPicture: Obx(
+              () => GFAvatar(
+                backgroundImage: NetworkImage(controller
+                        .user?.value?.userProfileUrl ??
+                    'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ab/9b/bb/ab9bbba6-6714-ed70-3b45-2fbec976a434/logo_gsa_ios_color-0-1x_U007emarketing-0-0-0-6-0-0-0-85-220-0.png/1200x630wa.png'),
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -28,24 +33,33 @@ class MyGFDrawer {
                 SizedBox(
                   height: 8,
                 ),
-                Text(
-                  'UserName: ${_auth.currentUser?.displayName ?? 'SMT Admin'}',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                Obx(
+                  () => Text(
+                    'UserName: ${controller.user?.value?.userName ?? 'SMT Admin'}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Text(
+                    'Email: ${controller.user?.value?.userEmail}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Text(
-                  'Email: ${_auth.currentUser?.email}',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
+                  'Role: Admin',
+                  style: TextStyle(color: ColorConsts.blackColor),
                 ),
               ],
             ),
           ),
+
           ...controller.brandList.map(
             (item) => ListTile(
               title: Text(

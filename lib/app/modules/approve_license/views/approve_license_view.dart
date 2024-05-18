@@ -22,7 +22,7 @@ class ApproveLicenseView extends GetView<ApproveLicenseController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Approve Users',
+          'Approve',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,

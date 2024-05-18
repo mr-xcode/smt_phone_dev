@@ -24,19 +24,19 @@ class AdminPanelView extends GetView<AdminPanelController> {
         centerTitle: false,
         actions: [
           GFButton(
+            color: Colors.white,
             onPressed: () {
               Get.toNamed('/admin-add-new');
             },
             text: "New",
             textStyle: const TextStyle(
-              color: Colors.white,
+              color: ColorConsts.priColor,
               fontWeight: FontWeight.bold,
             ),
             icon: const Icon(
               Icons.new_label,
-              color: Colors.white,
+              color: ColorConsts.priColor,
             ),
-            textColor: Colors.black,
           ),
           const SizedBox(
             width: 10,
@@ -44,16 +44,20 @@ class AdminPanelView extends GetView<AdminPanelController> {
         ],
       ),
       drawer: MyGFDrawer().showMyGFDrawer(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Get.toNamed('/approve-license');
         },
-        child: Text(
+        label: Text(
           "License",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
+        ),
+        icon: const Icon(
+          Icons.verified,
+          color: Colors.white,
         ),
         backgroundColor: ColorConsts.priColor,
       ),

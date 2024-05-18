@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 import 'package:smt_phonesh_dev/app/modules/admin_panel/controllers/admin_panel_controller.dart';
 
 class MyGFDrawer {
@@ -14,6 +15,7 @@ class MyGFDrawer {
         padding: EdgeInsets.zero,
         children: <Widget>[
           GFDrawerHeader(
+            centerAlign: true,
             decoration: BoxDecoration(
               color: Color(0xff0C89CE),
             ),
@@ -29,21 +31,29 @@ class MyGFDrawer {
                 SizedBox(
                   height: 8,
                 ),
-                Obx(() => Text(
-                      'UserName: ${controller.user?.value?.userName ?? 'SMT Admin'}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    )),
-                Obx(() => Text(
-                      'Email: ${controller.user?.value?.userEmail}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                      ),
-                    )),
+                Obx(
+                  () => Text(
+                    'UserName: ${controller.user?.value?.userName ?? 'SMT Admin'}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Text(
+                    'Email: ${controller.user?.value?.userEmail}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Text(
+                  'Role: Admin',
+                  style: TextStyle(color: ColorConsts.blackColor),
+                ),
               ],
             ),
           ),
