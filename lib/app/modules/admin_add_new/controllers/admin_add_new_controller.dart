@@ -19,24 +19,23 @@ class AdminAddNewController extends GetxController {
   final stringSubModelList = "".obs;
 
   List<String> brandList = [
-    'Samsung',
     'Apple',
+    'Asus',
+    'Google',
+    'HTC',
+    'Honor',
     'Huawei',
-    'Xiaomi',
+    'LG',
+    'Meizu',
+    'Nokia',
     'OnePlus',
     'Oppo',
-    'Vivo',
     'Realme',
-    'Meizu',
-    'Tecno',
-    'Honor',
-    'Asus',
-    'Gionee',
-    'Nokia',
-    'HTC',
-    'Google',
-    'LG',
+    'Samsung',
     'Sony',
+    'Tecno',
+    'Vivo',
+    'Xiaomi',
   ];
 
   Future getModelList() async {

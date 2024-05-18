@@ -7,24 +7,23 @@ import 'package:get/get.dart';
 class PremiumController extends GetxController {
   //TODO: Implement PremiumController
   List<String> brandList = [
-    'Samsung',
     'Apple',
+    'Asus',
+    'Google',
+    'HTC',
+    'Honor',
     'Huawei',
-    'Xiaomi',
+    'LG',
+    'Meizu',
+    'Nokia',
     'OnePlus',
     'Oppo',
-    'Vivo',
     'Realme',
-    'Meizu',
-    'Tecno',
-    'Honor',
-    'Asus',
-    'Gionee',
-    'Nokia',
-    'HTC',
-    'Google',
-    'LG',
+    'Samsung',
     'Sony',
+    'Tecno',
+    'Vivo',
+    'Xiaomi',
   ];
 
   final selectedBrand = ''.obs;

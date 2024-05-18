@@ -1,7 +1,7 @@
 name: smt_phonesh_dev
-version: 1.0.0+1
+version: 1.0.0-beta.1
 publish_to: none
-description: A new Flutter project.
+description: A Schematic Diagram tool for Myanmar Phone Service Technicians.
 environment: 
   sdk: '>=3.3.4 <4.0.0'
 
