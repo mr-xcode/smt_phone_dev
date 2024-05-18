@@ -17,6 +17,7 @@ abstract class Routes {
   static const BUYING = _Paths.BUYING;
   static const APPROVE_LICENSE = _Paths.APPROVE_LICENSE;
   static const TRAINING = _Paths.TRAINING;
+  static const REQUEST_MISSING = _Paths.REQUEST_MISSING;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const BUYING = '/buying';
   static const APPROVE_LICENSE = '/approve-license';
   static const TRAINING = '/training';
+  static const REQUEST_MISSING = '/request-missing';
 }

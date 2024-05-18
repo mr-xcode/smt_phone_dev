@@ -18,6 +18,8 @@ import '../modules/premium/bindings/premium_binding.dart';
 import '../modules/premium/views/premium_view.dart';
 import '../modules/pricing/bindings/pricing_binding.dart';
 import '../modules/pricing/views/pricing_view.dart';
+import '../modules/request_missing/bindings/request_missing_binding.dart';
+import '../modules/request_missing/views/request_missing_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.TRAINING,
       page: () => const TrainingView(),
       binding: TrainingBinding(),
+    ),
+    GetPage(
+      name: _Paths.REQUEST_MISSING,
+      page: () => const RequestMissingView(),
+      binding: RequestMissingBinding(),
     ),
   ];
 }

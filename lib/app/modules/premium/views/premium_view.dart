@@ -41,6 +41,24 @@ class PremiumView extends GetView<PremiumController> {
         ],
       ),
       drawer: PremiumDrawer(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your button action here
+          Get.toNamed('/request-missing');
+        },
+        icon: Icon(
+          Icons.insert_chart,
+          color: Colors.white,
+        ),
+        label: Text(
+          'Request Missing',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: ColorConsts.priColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.0),
+        ),
+      ),
     );
   }
 }
