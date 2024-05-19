@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
@@ -49,76 +50,88 @@ class AdminAddNewView extends GetView<AdminAddNewController> {
       ),
       drawer: MyGFDrawer().showMyGFDrawer(),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         height: double.maxFinite,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Obx(
-                () => Text((controller.selectedBrand.value == '')
-                    ? 'Select Brand Frist'
-                    : "Brand: ${controller.selectedBrand.value}"),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Obx(() {
-                if (controller.isModelVisible.value) {
-                  return TextField(
-                    enabled: controller.isTextEnable.value,
-                    controller: controller.modelTextController,
-                    decoration: const InputDecoration(labelText: "Model: "),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              }),
-              const SizedBox(
-                height: 20,
-              ),
-              Obx(() {
-                if (controller.isModelVisible.value) {
-                  return GFButton(
-                    onPressed: controller.isButtonEnable.value
-                        ? () {
-                            controller.confirmModel();
-                          }
-                        : null,
-                    text: "Confirm",
-                    color: Colors.deepPurpleAccent,
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              }),
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              // Other Slivers
+              SliverToBoxAdapter(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Obx(
+                      () => Text(
+                        (controller.selectedBrand.value == '')
+                            ? 'Select Brand Frist'
+                            : "Brand: ${controller.selectedBrand.value}",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Obx(() {
+                      if (controller.isModelVisible.value) {
+                        return TextField(
+                          enabled: controller.isTextEnable.value,
+                          controller: controller.modelTextController,
+                          decoration:
+                              const InputDecoration(labelText: "Model: "),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    }),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Obx(() {
+                      if (controller.isModelVisible.value) {
+                        return GFButton(
+                          onPressed: controller.isButtonEnable.value
+                              ? () {
+                                  controller.confirmModel();
+                                }
+                              : null,
+                          text: "Confirm",
+                          color: Colors.deepPurpleAccent,
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    }),
 
-              const SizedBox(
-                height: 20,
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    // upload loader
+                    Obx(() {
+                      if (_gridview_controller.isLoader.value) {
+                        return const GFLoader();
+                      } else {
+                        return Container();
+                      }
+                    }),
+                  ],
+                ),
               ),
-
-              // upload loader
-              Obx(() {
-                if (_gridview_controller.isLoader.value) {
-                  return const GFLoader();
-                } else {
-                  return Container();
-                }
-              }),
-
-              // Custom table for upload form
-              Obx(() {
-                if (controller.isGridViewVisible.value) {
-                  return MyGridview().showMyGridview();
-                } else {
-                  return const SizedBox();
-                }
-              }),
-            ],
+            ];
+          },
+          body: Obx(
+            () {
+              if (controller.isGridViewVisible.value) {
+                return MyGridview().showMyGridview();
+              } else {
+                return const SizedBox();
+              }
+            },
           ),
         ),
       ),
