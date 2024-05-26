@@ -13,9 +13,7 @@ class GridviewControllController extends GetxController {
   late String filename;
   late String fileext;
   final storageRef = FirebaseStorage.instance.ref();
-
   final selectedFile = [].obs;
-
   final isLoader = false.obs;
 
   // Upload Buttons
@@ -43,6 +41,10 @@ class GridviewControllController extends GetxController {
   final isFlashEnabled = false.obs;
   final isSensorEnabled = false.obs;
 
+  final ismtk9008Enabled = false.obs;
+  final isBlockDragramEnabled = false.obs;
+  final ispcbboardEnabled = false.obs;
+
   // File Choose Buttons
   final isChargerChooseEnabled = true.obs;
   final isAudioChooseEnabled = true.obs;
@@ -67,6 +69,10 @@ class GridviewControllController extends GetxController {
   final isHandfreeChooseEnabled = true.obs;
   final isFlashChooseEnabled = true.obs;
   final isSensorChooseEnabled = true.obs;
+
+  final ismtk9008ChooseEnabled = true.obs;
+  final isBlockDragramChooseEnabled = true.obs;
+  final ispcbboardChooseEnabled = true.obs;
 
   // Upload Button Text
   final chargerUplodText = "Upload".obs;
@@ -93,6 +99,10 @@ class GridviewControllController extends GetxController {
   final flashUploadText = "Upload".obs;
   final sensorUploadText = "Upload".obs;
 
+  final mtk9008UploadText = "Upload".obs;
+  final blockDragramUploadText = "Upload".obs;
+  final pcbboardUploadText = "Upload".obs;
+
   // Choose File Button Text
   final chargerFileText = "Choose Files...".obs;
   final audioFileText = "Choose Files...".obs;
@@ -117,6 +127,10 @@ class GridviewControllController extends GetxController {
   final handfreeFileText = "Choose Files...".obs;
   final flashFileText = "Choose Files...".obs;
   final sensorFileText = "Choose Files...".obs;
+
+  final mtk9008FileText = "Choose File...".obs;
+  final blockDragramFileText = "Choose File...".obs;
+  final pcbboardFileText = "Choose File...".obs;
 
   final _home_controller = Get.put(AdminAddNewController());
 
@@ -169,14 +183,14 @@ class GridviewControllController extends GetxController {
           isSpeakerChooseEnabled.value = false;
           speakerFileText.value = "Choosen...";
           break;
-        case "Sim-Card":
+        case "Sim Card":
           isSimcardEnabled.value = true;
 
           // Choose File Button text change and Disable
           isSimcardChooseEnabled.value = false;
           simcardFileText.value = "Choosen...";
           break;
-        case "SD-Card":
+        case "SD Card":
           isSdcardEnabled.value = true;
 
           // Choose File Button text change and Disable
@@ -211,49 +225,49 @@ class GridviewControllController extends GetxController {
           isNetworkChooseEnabled.value = false;
           networkFileText.value = "Choosen...";
           break;
-        case "Wifi-Bt-Gps":
+        case "Wifi Bt Gps":
           isWifiEnabled.value = true;
 
           // Choose File Button text change and Disable
           isWifiChooseEnabled.value = false;
           wifiFileText.value = "Choosen...";
           break;
-        case "Back-Cam":
+        case "Back Cam":
           isBackcamEnabled.value = true;
 
           // Choose File Button text change and Disable
           isBackcamChooseEnabled.value = false;
           backcamFileText.value = "Choosen...";
           break;
-        case "Front-Cam":
+        case "Front Cam":
           isFrontcamEnabled.value = true;
 
           // Choose File Button text change and Disable
           isFrontcamChooseEnabled.value = false;
           frontcamFileText.value = "Choosen...";
           break;
-        case "CPU-Vol":
+        case "CPU Vol":
           isCpuvolEnabled.value = true;
 
           // Choose File Button text change and Disable
           isCpuvolChooseEnabled.value = false;
           cpuvolFileText.value = "Choosen...";
           break;
-        case "EMMC-Vol":
+        case "EMMC Vol":
           isEmmcvolEnabled.value = true;
 
           // Choose File Button text change and Disable
           isEmmcvolChooseEnabled.value = false;
           emmcvolFileText.value = "Choosen...";
           break;
-        case "Finger-Print":
+        case "Finger Print":
           isFingerEnabled.value = true;
 
           // Choose File Button text change and Disable
           isFingerChooseEnabled.value = false;
           fingerFileText.value = "Choosen...";
           break;
-        case "Hand-Free":
+        case "Hand Free":
           isHandfreeEnabled.value = true;
 
           // Choose File Button text change and Disable
@@ -273,6 +287,30 @@ class GridviewControllController extends GetxController {
           // Choose File Button text change and Disable
           isSensorChooseEnabled.value = false;
           sensorFileText.value = "Choosen...";
+          break;
+
+        case "9008 & MTK Mode":
+          ismtk9008Enabled.value = true;
+
+          // Choose File Button text change and Disable
+          ismtk9008ChooseEnabled.value = false;
+          mtk9008FileText.value = "Choosen...";
+          break;
+
+        case "Block Diagram":
+          isBlockDragramEnabled.value = true;
+
+          // Choose File Button text change and Disable
+          isBlockDragramChooseEnabled.value = false;
+          blockDragramFileText.value = "Choosen...";
+          break;
+
+        case "PCB Board":
+          ispcbboardEnabled.value = true;
+
+          // Choose File Button text change and Disable
+          ispcbboardChooseEnabled.value = false;
+          pcbboardFileText.value = "Choosen...";
           break;
       }
     } else {
@@ -317,11 +355,11 @@ class GridviewControllController extends GetxController {
           isSpeakerEnabled.value = false;
           speakerUploadText.value = "Done";
           break;
-        case "Sim-Card":
+        case "Sim Card":
           isSimcardEnabled.value = false;
           simcardUploadText.value = "Done";
           break;
-        case "SD-Card":
+        case "SD Card":
           isSdcardEnabled.value = false;
           sdcardUploadText.value = "Done";
           break;
@@ -341,31 +379,31 @@ class GridviewControllController extends GetxController {
           isNetworkEnabled.value = false;
           networkUploadText.value = "Done";
           break;
-        case "Wifi-Bt-Gps":
+        case "Wifi Bt Gps":
           isWifiEnabled.value = false;
           wifiUploadText.value = "Done";
           break;
-        case "Back-Cam":
+        case "Back Cam":
           isBackcamEnabled.value = false;
           backcamUploadText.value = "Done";
           break;
-        case "Front-Cam":
+        case "Front Cam":
           isFrontcamEnabled.value = false;
           frontcamUploadText.value = "Done";
           break;
-        case "CPU-Vol":
+        case "CPU Vol":
           isCpuvolEnabled.value = false;
           cpuvolUploadText.value = "Done";
           break;
-        case "EMMC-Vol":
+        case "EMMC Vol":
           isEmmcvolEnabled.value = false;
           emmcvolUploadText.value = "Done";
           break;
-        case "Finger-Print":
+        case "Finger Print":
           isFingerEnabled.value = false;
           fingerUploadText.value = "Done";
           break;
-        case "Hand-Free":
+        case "Hand Free":
           isHandfreeEnabled.value = false;
           handfreeUploadText.value = "Done";
           break;
@@ -376,6 +414,18 @@ class GridviewControllController extends GetxController {
         case "Sensor":
           isSensorEnabled.value = false;
           sensorUploadText.value = "Done";
+          break;
+        case "9008 & MTK Mode":
+          ismtk9008Enabled.value = false;
+          mtk9008UploadText.value = "Done";
+          break;
+        case "Block Diagram":
+          isBlockDragramEnabled.value = false;
+          blockDragramUploadText.value = "Done";
+          break;
+        case "PCB Board":
+          ispcbboardEnabled.value = false;
+          pcbboardUploadText.value = "Done";
           break;
       }
     } catch (e) {
