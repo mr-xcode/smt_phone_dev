@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:smt_phonesh_dev/app/data/user.model.dart';
@@ -122,5 +123,16 @@ class BuyingController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", "Cannot create document!");
     }
+  }
+
+  void copyTextToClipboard() {
+    Clipboard.setData(ClipboardData(text: '09261654778'));
+    Get.snackbar(
+      'Copied',
+      '09261654778 Copied',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: GFColors.SUCCESS,
+      duration: Duration(seconds: 2),
+    );
   }
 }

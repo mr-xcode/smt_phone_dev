@@ -17,7 +17,7 @@ class BuyingView extends GetView<BuyingController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Buying',
+          'Checkout',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -43,7 +43,20 @@ class BuyingView extends GetView<BuyingController> {
                   height: 30,
                 ),
                 Text(
-                    'SMT - PhoneSH ${duration} ဝယ်ယူရန်အတွက်၊ \nကျသင့်ငွေ ${price} ကျပ် အား၊ \nKbzpay or Wave 09xxxxxxxxx, \nKo Ye Htut Oo Acc အား လွဲပေးပါရန် နှင့် - '),
+                    'SMT - PhoneSH ${duration} ဝယ်ယူရန်အတွက်၊ \nကျသင့်ငွေ ${price} ကျပ် အား၊ \nKbzpay or Wave 09261654778, \nYe Htet Oo Acc အား လွဲပေးပါရန် နှင့် - '),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: GFButton(
+                    onPressed: () {
+                      controller.copyTextToClipboard();
+                    },
+                    blockButton: true,
+                    color: ColorConsts.priColor,
+                    child: Text('ဖုန်းနာမ်ပါတ် ကူးယူရန်'),
+                  ),
+                ),
                 SizedBox(
                   height: 20,
                 ),
