@@ -19,6 +19,7 @@ abstract class Routes {
   static const TRAINING = _Paths.TRAINING;
   static const REQUEST_MISSING = _Paths.REQUEST_MISSING;
   static const DETAILED_VIEW = _Paths.DETAILED_VIEW;
+  static const ADMIN_DETAILED_VIEW = _Paths.ADMIN_DETAILED_VIEW;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const TRAINING = '/training';
   static const REQUEST_MISSING = '/request-missing';
   static const DETAILED_VIEW = '/detailed-view';
+  static const ADMIN_DETAILED_VIEW = '/admin-detailed-view';
 }

@@ -90,6 +90,11 @@ class AdminPanelView extends GetView<AdminPanelController> {
                     itemBuilder: (context, index) {
                       return GFListTile(
                           color: Colors.white,
+                          onTap: () {
+                            controller.modelDetailedTapped.value =
+                                controller.modelList[index];
+                            Get.toNamed('admin-detailed-view');
+                          },
                           title: Text(
                             controller.modelList[index],
                             style: const TextStyle(

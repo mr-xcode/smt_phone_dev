@@ -21,6 +21,8 @@ class AdminPanelController extends GetxController {
   final subModelList = [].obs;
   final stringSubModelList = "".obs;
 
+  final modelDetailedTapped = ''.obs;
+
   Rx<UserModel>? user;
 
   List<String> brandList = [
@@ -68,6 +70,7 @@ class AdminPanelController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    final modelDetailedTapped = ''.obs;
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await FirebaseFirestore.instance
             .collection('users')
@@ -98,6 +101,7 @@ class AdminPanelController extends GetxController {
     modelTextController.clear();
     Get.back();
     getModelList();
+    final modelDetailedTapped = ''.obs;
   }
 
   void confirmModel() {

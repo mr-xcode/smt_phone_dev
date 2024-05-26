@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/admin_add_new/bindings/admin_add_new_binding.dart';
 import '../modules/admin_add_new/views/admin_add_new_view.dart';
+import '../modules/admin_detailed_view/bindings/admin_detailed_view_binding.dart';
+import '../modules/admin_detailed_view/views/admin_detailed_view_view.dart';
 import '../modules/admin_panel/bindings/admin_panel_binding.dart';
 import '../modules/admin_panel/views/admin_panel_view.dart';
 import '../modules/approve_license/bindings/approve_license_binding.dart';
@@ -113,6 +115,11 @@ class AppPages {
       name: _Paths.DETAILED_VIEW,
       page: () => const DetailedViewView(),
       binding: DetailedViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_DETAILED_VIEW,
+      page: () => const AdminDetailedViewView(),
+      binding: AdminDetailedViewBinding(),
     ),
   ];
 }
