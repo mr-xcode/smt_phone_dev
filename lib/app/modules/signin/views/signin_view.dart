@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:smt_phonesh_dev/app/data/color_consts.dart';
 
 import '../controllers/signin_controller.dart';
@@ -105,38 +107,43 @@ class SigninView extends GetView<SigninController> {
                     controller.signIn();
                   },
                   blockButton: true,
-                  child: Text(
-                    "Login",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
+                  child: Obx(() => (controller.isLoading.value)
+                      ? GFLoader(
+                          type: GFLoaderType.ios,
+                        )
+                      : Text(
+                          "Login",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),
+                        )),
                   color: GFColors.FOCUS,
                 ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 8,
-            child: GFButton(
-              onPressed: () {
-                Get.toNamed('/signup');
-              },
-              child: Row(
-                children: [
-                  Text("Not a member? "),
-                  Text(
-                    "Sign up ",
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white,
-                        fontSize: 14,
-                        color: GFColors.WARNING,
-                        fontWeight: FontWeight.w600),
+                SizedBox(
+                  height: 10,
+                ),
+                GFButton(
+                  onPressed: () {
+                    Get.toNamed('/signup');
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text("Not a member? "),
+                      Text(
+                        "Sign up ",
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                            fontSize: 14,
+                            color: GFColors.WARNING,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text("now"),
+                    ],
                   ),
-                  Text("now"),
-                ],
-              ),
-              color: GFColors.TRANSPARENT,
+                  color: GFColors.TRANSPARENT,
+                ),
+              ],
             ),
           ),
         ],
