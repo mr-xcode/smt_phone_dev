@@ -54,7 +54,7 @@ class BuyingView extends GetView<BuyingController> {
                     },
                     blockButton: true,
                     color: ColorConsts.priColor,
-                    child: Text('ဖုန်းနာမ်ပါတ် ကူးယူရန်'),
+                    child: Text('ဖုန်းနံပါတ် ကူးယူရန်'),
                   ),
                 ),
                 SizedBox(
