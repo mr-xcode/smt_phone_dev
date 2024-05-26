@@ -18,7 +18,7 @@ class AdminDetailedViewView extends GetView<AdminDetailedViewController> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          'Detailed: ${mController.selectedBrand.value}/${mController.modelDetailedTapped.value}',
+          '${mController.selectedBrand.value}/${mController.modelDetailedTapped.value}',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -28,14 +28,25 @@ class AdminDetailedViewView extends GetView<AdminDetailedViewController> {
       ),
       body: Obx(
         () => (controller.isLoading.value)
-            ? GFLoader()
+            ? GFLoader(
+                type: GFLoaderType.ios,
+              )
             : Container(
                 padding: EdgeInsets.all(10),
                 child: ListView.builder(
                   itemCount: controller.stringSubModelList.value.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onLongPress: () {
+                      onLongPress: () async {
+                        try {
+                          await controller.deleteFolderRecursive(
+                              '${mController.selectedBrand}/${mController.modelList[index]}/${controller.stringSubModelList[index]}');
+                        } catch (e) {
+                          print(e);
+                          return;
+                        }
+                        print(
+                            '${mController.selectedBrand}/${mController.modelList[index]}/${controller.stringSubModelList[index]}');
                         Get.back();
                         Get.snackbar(
                           "Del",

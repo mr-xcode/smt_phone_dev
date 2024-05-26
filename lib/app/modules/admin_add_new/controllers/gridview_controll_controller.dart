@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:smt_phonesh_dev/app/modules/admin_add_new/controllers/admin_add_new_controller.dart';
 import 'package:smt_phonesh_dev/app/modules/admin_panel/controllers/admin_panel_controller.dart';
 
@@ -330,7 +331,13 @@ class GridviewControllController extends GetxController {
         uploadFile.delete();
       }
 
-      Get.snackbar("Success", "Upload Success");
+      Get.snackbar(
+        "Success",
+        "Upload done!",
+        duration: Duration(seconds: 2),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: GFColors.SUCCESS,
+      );
       isLoader.value = false;
 
       switch (title) {

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:smt_phonesh_dev/app/components/my_gfdrawer.dart';
 import 'package:smt_phonesh_dev/app/data/color_consts.dart';
+import 'package:smt_phonesh_dev/app/modules/admin_panel/views/widgets/my_body.dart';
+import 'package:smt_phonesh_dev/app/modules/admin_panel/views/widgets/my_bottom_sheet.dart';
 
 import '../controllers/admin_panel_controller.dart';
 
@@ -23,6 +27,30 @@ class AdminPanelView extends GetView<AdminPanelController> {
         backgroundColor: ColorConsts.priColor,
         centerTitle: false,
         actions: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white.withAlpha(50),
+            ),
+            child: IconButton(
+              onPressed: () {
+                if (controller.myGFController.isBottomSheetOpened) {
+                  controller.myGFController.hideBottomSheet();
+                } else {
+                  controller.myGFController.showBottomSheet();
+                }
+              },
+              icon: Icon(
+                Icons.info,
+              ),
+              tooltip: 'About',
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
           GFButton(
             color: Colors.white,
             onPressed: () {
@@ -61,64 +89,8 @@ class AdminPanelView extends GetView<AdminPanelController> {
         ),
         backgroundColor: ColorConsts.priColor,
       ),
-      body: Obx(() {
-        return Container(
-          width: double.infinity,
-          height: double.infinity,
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              (controller.selectedBrand.isEmpty)
-                  ? Text(
-                      "!!! Select Brand First !!!",
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.red),
-                    )
-                  : Text(
-                      '==> ' + controller.selectedBrand.value + ' <==',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.blue),
-                    ),
-              if (controller.selectedBrand.value.isNotEmpty)
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.modelList.length,
-                    itemBuilder: (context, index) {
-                      return GFListTile(
-                          color: Colors.white,
-                          onTap: () {
-                            controller.modelDetailedTapped.value =
-                                controller.modelList[index];
-                            Get.toNamed('admin-detailed-view');
-                          },
-                          title: Text(
-                            controller.modelList[index],
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          icon: IconButton(
-                            onPressed: () async {
-                              return await controller
-                                  .deleteFolderRecursive(
-                                      '${controller.selectedBrand}/${controller.modelList[index]}')
-                                  .then((value) =>
-                                      controller.modelList.removeAt(index));
-                            },
-                            icon: const Icon(Icons.delete_forever),
-                            color: GFColors.DANGER,
-                            iconSize: 36,
-                          ));
-                    },
-                  ),
-                ),
-            ],
-          ),
-        );
-      }),
+      body: MyBody(),
+      bottomSheet: myBottomSheet(controller: controller),
     );
   }
 }

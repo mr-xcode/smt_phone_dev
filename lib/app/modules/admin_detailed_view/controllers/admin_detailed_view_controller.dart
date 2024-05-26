@@ -61,8 +61,21 @@ class AdminDetailedViewController extends GetxController {
     stringDetailedlList.clear();
     result = '';
     for (var prefix in listResult.items) {
-      result += prefix.name.toString();
+      result += prefix.name.toString() + ',\n';
     }
     myList.add(result);
+  }
+
+  Future<void> deleteFolderRecursive(String folderPath) async {
+    final storage = FirebaseStorage.instance;
+    final ListResult result = await storage.ref(folderPath).listAll();
+    for (final Reference ref in result.items) {
+      await ref.delete();
+    }
+
+    // Recursively delete subfolders
+    for (final Reference ref in result.prefixes) {
+      await deleteFolderRecursive(ref.fullPath);
+    }
   }
 }

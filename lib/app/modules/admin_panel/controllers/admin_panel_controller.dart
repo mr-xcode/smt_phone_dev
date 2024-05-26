@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
 import 'package:smt_phonesh_dev/app/data/user.model.dart';
 
 class AdminPanelController extends GetxController {
@@ -22,6 +23,8 @@ class AdminPanelController extends GetxController {
   final stringSubModelList = "".obs;
 
   final modelDetailedTapped = ''.obs;
+
+  final GFBottomSheetController myGFController = GFBottomSheetController();
 
   Rx<UserModel>? user;
 
