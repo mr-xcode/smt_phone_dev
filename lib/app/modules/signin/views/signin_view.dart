@@ -100,7 +100,29 @@ class SigninView extends GetView<SigninController> {
                       ),
                     )),
                 SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/forgot-password');
+                      },
+                      child: Text(
+                        'forgot password?',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                          fontSize: 12,
+                          color: GFColors.WARNING,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
                 ),
                 GFButton(
                   onPressed: () {
