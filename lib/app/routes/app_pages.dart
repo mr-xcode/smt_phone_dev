@@ -24,8 +24,12 @@ import '../modules/premium/bindings/premium_binding.dart';
 import '../modules/premium/views/premium_view.dart';
 import '../modules/pricing/bindings/pricing_binding.dart';
 import '../modules/pricing/views/pricing_view.dart';
+import '../modules/privacy_policy/bindings/privacy_policy_binding.dart';
+import '../modules/privacy_policy/views/privacy_policy_view.dart';
 import '../modules/request_missing/bindings/request_missing_binding.dart';
 import '../modules/request_missing/views/request_missing_view.dart';
+import '../modules/rules/bindings/rules_binding.dart';
+import '../modules/rules/views/rules_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -127,6 +131,16 @@ class AppPages {
       name: _Paths.FORGOT_PASSWORD,
       page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.RULES,
+      page: () => const RulesView(),
+      binding: RulesBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRIVACY_POLICY,
+      page: () => const PrivacyPolicyView(),
+      binding: PrivacyPolicyBinding(),
     ),
   ];
 }

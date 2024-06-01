@@ -138,18 +138,73 @@ class SignupView extends GetView<SignupController> {
                   height: 20,
                 ),
                 // Signup Button
-                Obx(() => GFButton(
-                      onPressed: controller.isSignUpLoading.value
-                          ? null
-                          : () {
-                              controller.signUp();
-                            },
-                      color: ColorConsts.priColor,
-                      blockButton: true,
-                      child: controller.isSignUpLoading.value
-                          ? GFLoader()
-                          : Text('Sign Up'),
-                    )),
+                Obx(
+                  () => GFButton(
+                    onPressed: controller.isSignUpLoading.value
+                        ? null
+                        : () {
+                            controller.signUp();
+                          },
+                    color: ColorConsts.priColor,
+                    blockButton: true,
+                    child: controller.isSignUpLoading.value
+                        ? GFLoader()
+                        : Text('Sign Up'),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: 'အကောင့်ဖွင့်ခြင်းဆိုင်ရာ ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                    ),
+                    TappableTextSpan(
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                      text: 'စည်းမျဥ်းစည်းကမ်း',
+                      onTap: () {
+                        // Add your onTap logic for the "colorful text" here
+                        Get.toNamed('/rules');
+                      },
+                    ),
+                    TextSpan(
+                      text: ' နှင့် ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                    ),
+                    TappableTextSpan(
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                      text: 'လုံခြုံရေးမူဝါဒများ',
+                      onTap: () {
+                        // Add your onTap logic for the "colorful text" here
+                        Get.toNamed('/privacy-policy');
+                      },
+                    ),
+                    TextSpan(
+                      text: 'ကို သဘောတူနားလည်ပြီးဖြစ်ပါသည်။',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ]),
+                ),
               ],
             ),
           ),

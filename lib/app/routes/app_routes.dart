@@ -21,6 +21,8 @@ abstract class Routes {
   static const DETAILED_VIEW = _Paths.DETAILED_VIEW;
   static const ADMIN_DETAILED_VIEW = _Paths.ADMIN_DETAILED_VIEW;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const RULES = _Paths.RULES;
+  static const PRIVACY_POLICY = _Paths.PRIVACY_POLICY;
 }
 
 abstract class _Paths {
@@ -43,4 +45,6 @@ abstract class _Paths {
   static const DETAILED_VIEW = '/detailed-view';
   static const ADMIN_DETAILED_VIEW = '/admin-detailed-view';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const RULES = '/rules';
+  static const PRIVACY_POLICY = '/privacy-policy';
 }
