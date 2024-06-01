@@ -20,6 +20,7 @@ abstract class Routes {
   static const REQUEST_MISSING = _Paths.REQUEST_MISSING;
   static const DETAILED_VIEW = _Paths.DETAILED_VIEW;
   static const ADMIN_DETAILED_VIEW = _Paths.ADMIN_DETAILED_VIEW;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const REQUEST_MISSING = '/request-missing';
   static const DETAILED_VIEW = '/detailed-view';
   static const ADMIN_DETAILED_VIEW = '/admin-detailed-view';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }
