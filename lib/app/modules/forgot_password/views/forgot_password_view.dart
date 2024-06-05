@@ -13,7 +13,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'SMT - PhoneSH Forgot Password',
+          'Forgot Password',
           style: TextStyle(
             fontSize: 19,
             fontWeight: FontWeight.w600,
@@ -57,7 +57,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           controller.emailController.text.toString(),
                         )) {
                           Get.back();
-                          controller.showEmailSentDialog();
+                          await controller.sendResetmail();
                         } else {
                           controller.showEmailNotRegisteredDialog();
                         }
