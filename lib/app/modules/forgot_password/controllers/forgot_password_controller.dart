@@ -45,7 +45,7 @@ class ForgotPasswordController extends GetxController {
   Future<void> sendResetmail() async {
     try {
       await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: '${emailController.text.toString()}');
+          .sendPasswordResetEmail(email: '${emailController.text.trim()}');
       Get.snackbar(
         'Success',
         "Password was send to you email!",
