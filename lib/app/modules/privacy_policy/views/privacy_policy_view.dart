@@ -21,6 +21,10 @@ class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
         ),
         backgroundColor: ColorConsts.scaffoldBgColor,
       ),
+      body: SafeArea(
+          child: Container(
+        child: Text('body'),
+      )),
     );
   }
 }
