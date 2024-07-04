@@ -23,3 +23,6 @@
   Touch,
   Wifi-Bt-Gps, 
 ]
+
+mgwinnminnhtet111@gmail.com
+originalbebee@gmail.com
